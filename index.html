@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPlatform - Advanced Learning Experience</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2563eb;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --accent-green: #10b981;
+            --dark-green: #047857;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .logo::before {
+            content: "🎓";
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--dark-green);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-green);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: var(--gray-50);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        /* Learning Tools */
+        .learning-tools {
+            padding: 80px 0;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tool-card {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .tool-header {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .tool-content {
+            padding: 2rem;
+        }
+
+        /* Math Solver */
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .calc-display {
+            grid-column: 1 / -1;
+            padding: 15px;
+            background: var(--gray-100);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .calc-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--gray-100);
+        }
+
+        .calc-btn:hover {
+            background: var(--gray-200);
+            transform: scale(1.05);
+        }
+
+        .calc-btn.operator {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .calc-btn.equals {
+            background: var(--accent-green);
+            color: var(--white);
+        }
+
+        /* Flashcards */
+        .flashcard-container {
+            margin-top: 1rem;
+        }
+
+        .flashcard-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .flashcard-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .flashcard-form input:focus {
+            border-color: var(--primary-blue);
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 200px;
+            margin: 10px 0;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .flashcard-front {
+            background: var(--light-blue);
+            color: var(--text-dark);
+        }
+
+        .flashcard-back {
+            background: var(--accent-green);
+            color: var(--white);
+            transform: rotateY(180deg);
+        }
+
+        /* Quiz System */
+        .quiz-container {
+            margin-top: 1rem;
+        }
+
+        .question {
+            background: var(--gray-50);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .question h4 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .option.selected {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .option.correct {
+            border-color: var(--accent-green);
+            background: #d1fae5;
+        }
+
+        .option.incorrect {
+            border-color: #ef4444;
+            background: #fee2e2;
+        }
+
+        .quiz-score {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-green);
+            margin: 20px 0;
+        }
+
+        /* Courses Section */
+        .courses {
+            padding: 80px 0;
+            background: var(--gray-50);
+        }
+
+        .course-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--primary-blue);
+            background: transparent;
+            color: var(--primary-blue);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--secondary-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-category {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .course-description {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        /* Progress Tracker */
+        .progress-tracker {
+            padding: 80px 0;
+        }
+
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .progress-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .progress-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--accent-green) 0deg, var(--gray-200) 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .progress-circle::before {
+            content: '';
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--white);
+            position: absolute;
+        }
+
+        .progress-text {
+            position: relative;
+            z-index: 1;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            background: var(--accent-green);
+        }
+
+        .badge.locked {
+            background: var(--gray-200);
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-green);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #374151;
+            color: var(--text-light);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--white);
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid,
+            .tools-grid,
+            .courses-grid,
+            .progress-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flashcard-form {
+                flex-direction: column;
+            }
+
+            .flashcard-form input {
+                min-width: 100%;
+            }
+
+            .calculator {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+
+            .calc-btn {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .search-input {
+                padding: 12px 15px;
+            }
+
+            .search-btn {
+                padding: 8px 15px;
+            }
+
+            .tool-content {
+                padding: 1.5rem;
+            }
+
+            .progress-circle {
+                width: 120px;
+                height: 120px;
+            }
+
+            .progress-circle::before {
+                width: 90px;
+                height: 90px;
+            }
+
+            .progress-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">EduPlatform</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#tools">Learning Tools</a></li>
+                <li><a href="#progress">Progress Tracker</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Transform Your Learning Journey</h1>
+            <p>Discover interactive courses, practice with advanced tools, and track your progress</p>
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for courses, topics, or resources...">
+                <button class="search-btn" onclick="searchCourses()">🔍</button>
+            </div>
+            <div class="cta-buttons">
+                <a href="#courses" class="btn btn-primary">Start Learning</a>
+                <a href="#tools" class="btn btn-secondary">Try Tools</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose EduPlatform?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Interactive Lessons</h3>
+                    <p>Engage with dynamic content, quizzes, and hands-on activities that make learning memorable and effective.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your learning journey with detailed analytics, achievements, and personalized insights.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>Expert Tutors</h3>
+                    <p>Learn from industry professionals and certified educators who guide you every step of the way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Tools -->
+    <section class="learning-tools" id="tools">
+        <div class="container">
+            <h2 class="section-title">Interactive Learning Tools</h2>
+            <div class="tools-grid">
+                <!-- Math Solver -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3>🧮 Math Solver</h3>
+                    </div>
+                    <div class="tool-content">
+                        <input type="text" class="calc-display" id="calcDisplay" readonly>
+                        <div class="calculator">
+                            <button class="calc-btn" onclick="clearCalc()">C</button>
+                            <button class="calc-btn" onclick="deleteLast()">⌫</button>
+                            <button class="calc-btn operator" onclick="appendToCalc('/')">/</button>
+                            <button class="calc-btn operator" onclick="appendToCalc('*')">×</button>
+                            
+                            <button class="calc-btn" onclick="appendToCalc('7')">7</button>
+                            <button class="calc-btn" onclick="appendToCalc('8')">8</button>
+                            <button class="calc-btn" onclick="appendToCalc('9')">9</button>
+                            <button class="calc-btn operator" onclick="appendToCalc('-')">-</button>
+                            
+                            <button class="calc-btn" onclick="appendToCalc('4')">4</button>
+                            <button class="calc-btn" onclick="appendToCalc('5')">5</button>
+                            <button class="calc-btn" onclick="appendToCalc('6')">6</button>
+                            <button class="calc-btn operator" onclick="appendToCalc('+')">+</button>
+                            
+                            <button class="calc-btn" onclick="appendToCalc('1')">1</button>
+                            <button class="calc-btn" onclick="appendToCalc('2')">2</button>
+                            <button class="calc-btn" onclick="appendToCalc('3')">3</button>
+                            <button class="calc-btn equals" onclick="calculateResult()" rowspan="2">=</button>
+                            
+                            <button class="calc-btn" onclick="appendToCalc('0')" style="grid-column: span 2;">0</button>
+                            <button class="calc-btn" onclick="appendToCalc('.')">.</button>
+                        </div>
+                        <div id="calcSteps" class="mt-2"></div>
+                    </div>
+                </div>
+
+                <!-- Flashcard Generator -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3>📄 Flashcard Generator</h3>
+                    </div>
+                    <div class="tool-content">
+                        <div class="flashcard-form">
+                            <input type="text" id="flashcardFront" placeholder="Front side (question)">
+                            <input type="text" id="flashcardBack" placeholder="Back side (answer)">
+                            <button class="btn btn-primary" onclick="addFlashcard()">Add Card</button>
+                        </div>
+                        <div id="flashcardContainer" class="flashcard-container"></div>
+                        <button class="btn btn-secondary mt-2" onclick="clearFlashcards()">Clear All</button>
+                    </div>
+                </div>
+
+                <!-- Quiz System -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3>❓ Practice Quiz</h3>
+                    </div>
+                    <div class="tool-content">
+                        <div id="quizContainer" class="quiz-container">
+                            <button class="btn btn-primary" onclick="startQuiz()">Start New Quiz</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <h2 class="section-title">Featured Courses</h2>
+            <div class="course-filters">
+                <button class="filter-btn active" onclick="filterCourses('all')">All</button>
+                <button class="filter-btn" onclick="filterCourses('math')">Mathematics</button>
+                <button class="filter-btn" onclick="filterCourses('science')">Science</button>
+                <button class="filter-btn" onclick="filterCourses('programming')">Programming</button>
+                <button class="filter-btn" onclick="filterCourses('languages')">Languages</button>
+            </div>
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Courses will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Tracker -->
+    <section class="progress-tracker" id="progress">
+        <div class="container">
+            <h2 class="section-title">Your Learning Progress</h2>
+            <div class="progress-grid">
+                <div class="progress-card">
+                    <h3>Overall Progress</h3>
+                    <div class="progress-circle" id="overallProgress">
+                        <div class="progress-text">75%</div>
+                    </div>
+                    <p>Keep up the great work!</p>
+                </div>
+                <div class="progress-card">
+                    <h3>Courses Completed</h3>
+                    <div class="progress-circle" id="coursesProgress">
+                        <div class="progress-text">12</div>
+                    </div>
+                    <p>Courses finished this month</p>
+                </div>
+                <div class="progress-card">
+                    <h3>Achievement Badges</h3>
+                    <div class="badges" id="badgesContainer">
+                        <div class="badge">🏆</div>
+                        <div class="badge">⭐</div>
+                        <div class="badge">🎯</div>
+                        <div class="badge locked">🔒</div>
+                        <div class="badge locked">🔒</div>
+                    </div>
+                    <p>3 out of 5 badges earned</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#tools">Learning Tools</a></li>
+                        <li><a href="#progress">Progress Tracker</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li>📧 info@eduplatform.com</li>
+                        <li>📞 +1 (555) 123-4567</li>
+                        <li>📍 123 Education St, Learning City</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EduPlatform. All rights reserved. Made with ❤️ for learners worldwide.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global Variables
+        let flashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+        let userProgress = JSON.parse(localStorage.getItem('userProgress')) || {
+            overallProgress: 75,
+            coursesCompleted: 12,
+            badgesEarned: 3,
+            quizScores: []
+        };
+
+        // Sample courses data
+        const coursesData = [
+            {
+                id: 1,
+                title: "Advanced Calculus",
+                category: "math",
+                description: "Master derivatives, integrals, and advanced mathematical concepts",
+                price: "$79",
+                icon: "∫",
+                level: "Advanced"
+            },
+            {
+                id: 2,
+                title: "Quantum Physics",
+                category: "science",
+                description: "Explore the fascinating world of quantum mechanics and particle physics",
+                price: "$89",
+                icon: "⚛️",
+                level: "Expert"
+            },
+            {
+                id: 3,
+                title: "Python Programming",
+                category: "programming",
+                description: "Learn Python from basics to advanced web development",
+                price: "$69",
+                icon: "🐍",
+                level: "Beginner"
+            },
+            {
+                id: 4,
+                title: "Spanish Mastery",
+                category: "languages",
+                description: "Become fluent in Spanish with interactive lessons and practice",
+                price: "$59",
+                icon: "🇪🇸",
+                level: "Intermediate"
+            },
+            {
+                id: 5,
+                title: "Data Structures",
+                category: "programming",
+                description: "Master algorithms and data structures for coding interviews",
+                price: "$79",
+                icon: "🌳",
+                level: "Intermediate"
+            },
+            {
+                id: 6,
+                title: "Organic Chemistry",
+                category: "science",
+                description: "Understand molecular structures and chemical reactions",
+                price: "$75",
+                icon: "🧪",
+                level: "Advanced"
+            },
+            {
+                id: 7,
+                title: "Linear Algebra",
+                category: "math",
+                description: "Vectors, matrices, and their applications in modern mathematics",
+                price: "$65",
+                icon: "📐",
+                level: "Intermediate"
+            },
+            {
+                id: 8,
+                title: "French Literature",
+                category: "languages",
+                description: "Explore classic and modern French literary works",
+                price: "$55",
+                icon: "📚",
+                level: "Advanced"
+            }
+        ];
+
+        // Sample quiz questions
+        const quizQuestions = [
+            {
+                question: "What is the derivative of x²?",
+                options: ["2x", "x²", "2", "x"],
+                correct: 0
+            },
+            {
+                question: "Which programming language is known as the 'language of the web'?",
+                options: ["Python", "Java", "JavaScript", "C++"],
+                correct: 2
+            },
+            {
+                question: "What is the capital of France?",
+                options: ["London", "Berlin", "Madrid", "Paris"],
+                correct: 3
+            },
+            {
+                question: "Which element has the chemical symbol 'O'?",
+                options: ["Gold", "Oxygen", "Silver", "Iron"],
+                correct: 1
+            },
+            {
+                question: "What is 15% of 200?",
+                options: ["25", "30", "35", "40"],
+                correct: 1
+            }
+        ];
+
+        let currentQuiz = [];
+        let currentQuestionIndex = 0;
+        let quizScore = 0;
+
+        // DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            loadFlashcards();
+            renderCourses();
+            updateProgressDisplay();
+            setupEventListeners();
+        });
+
+        // Initialize Application
+        function initializeApp() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.feature-card, .tool-card, .course-card, .progress-card').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Hamburger menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchCourses();
+                }
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'var(--white)';
+                    header.style.backdropFilter = 'none';
+                }
+            });
+        }
+
+        // Calculator Functions
+        function appendToCalc(value) {
+            const display = document.getElementById('calcDisplay');
+            if (display.value === '0' || display.value === 'Error') {
+                display.value = value;
+            } else {
+                display.value += value;
+            }
+        }
+
+        function clearCalc() {
+            document.getElementById('calcDisplay').value = '0';
+            document.getElementById('calcSteps').innerHTML = '';
+        }
+
+        function deleteLast() {
+            const display = document.getElementById('calcDisplay');
+            if (display.value.length > 1) {
+                display.value = display.value.slice(0, -1);
+            } else {
+                display.value = '0';
+            }
+        }
+
+        function calculateResult() {
+            const display = document.getElementById('calcDisplay');
+            const stepsDiv = document.getElementById('calcSteps');
+            const expression = display.value.replace(/×/g, '*');
+            
+            try {
+                // Basic expression evaluation with step-by-step breakdown
+                const result = Function('"use strict"; return (' + expression + ')')();
+                
+                // Show steps
+                stepsDiv.innerHTML = `
+                    <div style="background: var(--gray-50); padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <strong>Solution Steps:</strong><br>
+                        Expression: ${expression}<br>
+                        Result: ${result}
+                    </div>
+                `;
+                
+                display.value = result;
+                
+                // Save calculation to progress
+                saveCalculation(expression, result);
+                
+            } catch (error) {
+                display.value = 'Error';
+                stepsDiv.innerHTML = '<div style="color: red; margin-top: 10px;">Invalid expression</div>';
+            }
+        }
+
+        function saveCalculation(expression, result) {
+            let calculations = JSON.parse(localStorage.getItem('calculations')) || [];
+            calculations.push({
+                expression: expression,
+                result: result,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Keep only last 10 calculations
+            if (calculations.length > 10) {
+                calculations = calculations.slice(-10);
+            }
+            
+            localStorage.setItem('calculations', JSON.stringify(calculations));
+        }
+
+        // Flashcard Functions
+        function addFlashcard() {
+            const frontInput = document.getElementById('flashcardFront');
+            const backInput = document.getElementById('flashcardBack');
+            
+            const front = frontInput.value.trim();
+            const back = backInput.value.trim();
+            
+            if (front && back) {
+                const flashcard = {
+                    id: Date.now(),
+                    front: front,
+                    back: back,
+                    created: new Date().toISOString()
+                };
+                
+                flashcards.push(flashcard);
+                localStorage.setItem('flashcards', JSON.stringify(flashcards));
+                
+                frontInput.value = '';
+                backInput.value = '';
+                
+                renderFlashcards();
+                
+                // Show success message
+                showNotification('Flashcard added successfully!', 'success');
+            } else {
+                showNotification('Please fill in both sides of the flashcard', 'error');
+            }
+        }
+
+        function renderFlashcards() {
+            const container = document.getElementById('flashcardContainer');
+            
+            if (flashcards.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-light); margin: 20px 0;">No flashcards yet. Create your first one above!</p>';
+                return;
+            }
+            
+            container.innerHTML = flashcards.map(card => `
+                <div class="flashcard" onclick="flipCard(this)">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p>${card.front}</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>${card.back}</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="event.stopPropagation(); deleteFlashcard(${card.id})" 
+                            style="margin-top: 10px; background: #ef4444; color: white; padding: 5px 10px; font-size: 0.8rem;">
+                        Delete
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function flipCard(cardElement) {
+            cardElement.classList.toggle('flipped');
+        }
+
+        function deleteFlashcard(id) {
+            flashcards = flashcards.filter(card => card.id !== id);
+            localStorage.setItem('flashcards', JSON.stringify(flashcards));
+            renderFlashcards();
+            showNotification('Flashcard deleted', 'info');
+        }
+
+        function clearFlashcards() {
+            if (confirm('Are you sure you want to delete all flashcards?')) {
+                flashcards = [];
+                localStorage.setItem('flashcards', JSON.stringify(flashcards));
+                renderFlashcards();
+                showNotification('All flashcards cleared', 'info');
+            }
+        }
+
+        function loadFlashcards() {
+            renderFlashcards();
+        }
+
+        // Quiz Functions
+        function startQuiz() {
+            currentQuiz = [...quizQuestions].sort(() => Math.random() - 0.5).slice(0, 3);
+            currentQuestionIndex = 0;
+            quizScore = 0;
+            
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            const container = document.getElementById('quizContainer');
+            const question = currentQuiz[currentQuestionIndex];
+            
+            if (!question) {
+                showQuizResults();
+                return;
+            }
+            
+            container.innerHTML = `
+                <div class="question">
+                    <h4>Question ${currentQuestionIndex + 1} of ${currentQuiz.length}</h4>
+                    <p style="font-size: 1.1rem; margin-bottom: 15px;">${question.question}</p>
+                    <div class="options">
+                        ${question.options.map((option, index) => `
+                            <div class="option" onclick="selectOption(this, ${index})">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="btn btn-primary mt-2" onclick="submitAnswer()" style="display: none;" id="submitBtn">
+                        Next Question
+                    </button>
+                </div>
+            `;
+        }
+
+        function selectOption(optionElement, index) {
+            // Remove previous selections
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Select current option
+            optionElement.classList.add('selected');
+            optionElement.dataset.selectedIndex = index;
+            
+            // Show submit button
+            document.getElementById('submitBtn').style.display = 'inline-block';
+        }
+
+        function submitAnswer() {
+            const selectedOption = document.querySelector('.option.selected');
+            if (!selectedOption) return;
+            
+            const selectedIndex = parseInt(selectedOption.dataset.selectedIndex);
+            const correctIndex = currentQuiz[currentQuestionIndex].correct;
+            
+            // Show correct/incorrect answers
+            document.querySelectorAll('.option').forEach((opt, index) => {
+                if (index === correctIndex) {
+                    opt.classList.add('correct');
+                } else if (index === selectedIndex && index !== correctIndex) {
+                    opt.classList.add('incorrect');
+                }
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedIndex === correctIndex) {
+                quizScore++;
+            }
+            
+            // Move to next question after delay
+            setTimeout(() => {
+                currentQuestionIndex++;
+                renderQuizQuestion();
+            }, 1500);
+        }
+
+        function showQuizResults() {
+            const container = document.getElementById('quizContainer');
+            const percentage = Math.round((quizScore / currentQuiz.length) * 100);
+            
+            // Save quiz score
+            userProgress.quizScores.push({
+                score: quizScore,
+                total: currentQuiz.length,
+                percentage: percentage,
+                date: new Date().toISOString()
+            });
+            
+            // Update overall progress
+            if (percentage > 70) {
+                userProgress.overallProgress = Math.min(100, userProgress.overallProgress + 2);
+            }
+            
+            localStorage.setItem('userProgress', JSON.stringify(userProgress));
+            updateProgressDisplay();
+            
+            container.innerHTML = `
+                <div class="text-center">
+                    <div class="quiz-score">${quizScore} / ${currentQuiz.length}</div>
+                    <h3>Quiz Complete!</h3>
+                    <p>You scored ${percentage}%</p>
+                    <div style="margin: 20px 0;">
+                        ${percentage >= 80 ? '🎉 Excellent work!' : 
+                          percentage >= 60 ? '👍 Good job!' : 
+                          '💪 Keep practicing!'}
+                    </div>
+                    <button class="btn btn-primary" onclick="startQuiz()">Try Again</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">Back to Tools</button>
+                </div>
+            `;
+        }
+
+        function resetQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '<button class="btn btn-primary" onclick="startQuiz()">Start New Quiz</button>';
+        }
+
+        // Course Functions
+        function renderCourses(filter = 'all') {
+            const container = document.getElementById('coursesGrid');
+            const filteredCourses = filter === 'all' ? 
+                coursesData : 
+                coursesData.filter(course => course.category === filter);
+            
+            container.innerHTML = filteredCourses.map(course => `
+                <div class="course-card" data-category="${course.category}">
+                    <div class="course-image">
+                        ${course.icon}
+                    </div>
+                    <div class="course-content">
+                        <span class="course-category">${course.category.charAt(0).toUpperCase() + course.category.slice(1)}</span>
+                        <h3 class="course-title">${course.title}</h3>
+                        <p class="course-description">${course.description}</p>
+                        <div class="course-footer">
+                            <span class="course-price">${course.price}</span>
+                            <button class="btn btn-primary" onclick="enrollCourse(${course.id})">Enroll</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCourses(category) {
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Render filtered courses
+            renderCourses(category);
+        }
+
+        function enrollCourse(courseId) {
+            const course = coursesData.find(c => c.id === courseId);
+            if (course) {
+                showNotification(`Enrolled in ${course.title}!`, 'success');
+                
+                // Update user progress
+                userProgress.coursesCompleted++;
+                userProgress.overallProgress = Math.min(100, userProgress.overallProgress + 5);
+                localStorage.setItem('userProgress', JSON.stringify(userProgress));
+                updateProgressDisplay();
+            }
+        }
+
+        function searchCourses() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            if (!searchTerm) {
+                renderCourses();
+                return;
+            }
+            
+            const filteredCourses = coursesData.filter(course => 
+                course.title.toLowerCase().includes(searchTerm) ||
+                course.description.toLowerCase().includes(searchTerm) ||
+                course.category.toLowerCase().includes(searchTerm)
+            );
+            
+            const container = document.getElementById('coursesGrid');
+            
+            if (filteredCourses.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <h3>No courses found</h3>
+                        <p>Try searching with different keywords</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = filteredCourses.map(course => `
+                    <div class="course-card" data-category="${course.category}">
+                        <div class="course-image">
+                            ${course.icon}
+                        </div>
+                        <div class="course-content">
+                            <span class="course-category">${course.category.charAt(0).toUpperCase() + course.category.slice(1)}</span>
+                            <h3 class="course-title">${course.title}</h3>
+                            <p class="course-description">${course.description}</p>
+                            <div class="course-footer">
+                                <span class="course-price">${course.price}</span>
+                                <button class="btn btn-primary" onclick="enrollCourse(${course.id})">Enroll</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Progress Functions
+        function updateProgressDisplay() {
+            // Update overall progress circle
+            const overallCircle = document.getElementById('overallProgress');
+            const overallText = overallCircle.querySelector('.progress-text');
+            const overallPercentage = userProgress.overallProgress;
+            
+            overallText.textContent = `${overallPercentage}%`;
+            overallCircle.style.background = `conic-gradient(var(--accent-green) ${overallPercentage * 3.6}deg, var(--gray-200) 0deg)`;
+            
+            // Update courses completed
+            const coursesCircle = document.getElementById('coursesProgress');
+            const coursesText = coursesCircle.querySelector('.progress-text');
+            coursesText.textContent = userProgress.coursesCompleted;
+            
+            // Update badges
+            const badgesContainer = document.getElementById('badgesContainer');
+            const totalBadges = 5;
+            const earnedBadges = Math.min(userProgress.badgesEarned, totalBadges);
+            
+            badgesContainer.innerHTML = '';
+            const badgeIcons = ['🏆', '⭐', '🎯', '🚀', '💎'];
+            
+            for (let i = 0; i < totalBadges; i++) {
+                const badge = document.createElement('div');
+                badge.className = i < earnedBadges ? 'badge' : 'badge locked';
+                badge.textContent = i < earnedBadges ? badgeIcons[i] : '🔒';
+                badgesContainer.appendChild(badge);
+            }
+        }
+
+        // Utility Functions
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--accent-green)' : 
+                           type === 'error' ? '#ef4444' : 'var(--primary-blue)'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: var(--shadow-lg);
+                z-index: 1001;
+                animation: slideInRight 0.3s ease;
+                max-width: 300px;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Add animation keyframes if not exists
+            if (!document.getElementById('notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOutRight {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize everything when page loads
+        window.addEventListener('load', function() {
+            // Add loading animation completion
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+            
+            // Show welcome message
+            setTimeout(() => {
+                showNotification('Welcome to EduPlatform! Start your learning journey today.', 'success');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
