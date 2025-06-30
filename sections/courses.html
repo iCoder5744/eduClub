@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduClub</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+      <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <h2 class="section-title">Featured Courses</h2>
+            <div class="course-filters">
+                <button class="filter-btn active" onclick="filterCourses('all')">All</button>
+                <button class="filter-btn" onclick="filterCourses('math')">Mathematics</button>
+                <button class="filter-btn" onclick="filterCourses('science')">Science</button>
+                <button class="filter-btn" onclick="filterCourses('programming')">Programming</button>
+                <button class="filter-btn" onclick="filterCourses('languages')">Languages</button>
+            </div>
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Courses will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
