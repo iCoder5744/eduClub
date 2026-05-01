@@ -28,9 +28,12 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
   color: var(--text-dark);
   background: var(--white);
+}
+
+main {
+  margin-top: var(--header-height); /* Add space for fixed header */
 }
 
 .container {
@@ -124,8 +127,6 @@ nav {
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-
-
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
@@ -135,10 +136,10 @@ nav {
   .nav-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.4);
+    background: rgba(0, 0, 0, 0.4);
     opacity: 0;
     visibility: hidden;
-    transition: .3s;
+    transition: 0.3s;
     z-index: 1190;
   }
   .nav-overlay.active {
@@ -149,35 +150,47 @@ nav {
   /* 🔥 Sidebar (NO GAP) */
   .nav-links {
     position: fixed;
-    top: 0;              /* full top */
+    top: 60px; /* Exact header height - no gap */
     left: -100%;
     width: 75%;
     max-width: 320px;
-    height: 100vh;       /* full height */
+    height: calc(100vh - 60px); /* Adjust height exactly */
     background: var(--white);
     display: flex;
     flex-direction: column;
     gap: 14px;
-    padding: 16px;       /* ❌ padding-top 80px हटाओ */
+    padding: 30px 20px; /* Remove all padding */
+    margin: 0; /* Remove margin */
     box-shadow: var(--shadow-lg);
-    transition: left .3s ease;
-    z-index: 1200;       /* header (1200) के बराबर/ऊपर */
+    transition: left 0.3s ease;
+    z-index: 1200; /* Same as header */
     overflow-y: auto;
   }
 
-  .nav-links.active { left: 0; }
+  .nav-links.active {
+    left: 0;
+  }
 
   /* Links */
-  .nav-links li { width: 100%; }
+  .nav-links li {
+    width: 100%;
+  }
   .nav-links a {
     display: block;
     width: 100%;
-    padding: 12px 14px;
+    padding: 14px 16px; /* Add padding to links instead */
     border-radius: 10px;
     border: 1px solid var(--gray-200);
     font-size: 1.05rem;
+    margin: 0 8px; /* Add side margin for spacing */
   }
-  .nav-links a:hover { background: var(--light-blue); }
+  .nav-links a:hover {
+    background: var(--light-blue);
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
 }
 
 /* ===== GLOBAL BUTTON STYLES ===== */
@@ -315,34 +328,6 @@ footer {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 70px;
-    left: -100%;
-    width: 100%;
-    height: calc(100vh - 70px);
-    background: var(--white);
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    padding-top: 2rem;
-    transition: left 0.3s ease;
-  }
-
-  .nav-links.active {
-    left: 0;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-}
-
 @media (max-width: 480px) {
   .container {
     padding: 0 15px;
