@@ -1,0 +1,27 @@
+<!-- Courses Section -->
+<section class="courses" id="courses">
+    <div class="container">
+        <h2 class="section-title">Featured Courses</h2>
+        
+        <div class="course-filters" id="filterButtons" >
+            <button class="filter-btn active" onclick="filterCourses('all', event)">All</button>
+            <button class="filter-btn" onclick="filterCourses('math', event)">Mathematics</button>
+            <button class="filter-btn" onclick="filterCourses('science', event)">Science</button>
+            <button class="filter-btn" onclick="filterCourses('programming', event)">Programming</button>
+            <button class="filter-btn" onclick="filterCourses('languages', event)">Languages</button>
+        </div>
+        <div class="courses-grid" id="coursesGrid">
+            <!-- Courses will be populated by JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- Course Detail Modal -->
+<div id="courseDetailModal" class="course-modal" style="display: none;">
+    <div class="course-modal-content">
+        <button class="modal-close" onclick="closeCourseDetail()">&times;</button>
+        <div id="courseDetailBody">
+            <!-- Course detail will be populated by JavaScript -->
+        </div>
+    </div>
+</div>

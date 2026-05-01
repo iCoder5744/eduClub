@@ -1,54 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EduClub</title>
-    <link rel="stylesheet" href="css/styles.css" />
-</head>
 
-<body>
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Section Styles -->
+    <link rel="stylesheet" href="sections/hero/hero.css" />
+    <link rel="stylesheet" href="sections/courses/courses.css" />
+    <link rel="stylesheet" href="sections/features/features.css" />
+    <link rel="stylesheet" href="sections/tools/tools.css" />
+    <link rel="stylesheet" href="sections/progress/progress.css" />
+  </head>
+
+  <body>
     <div data-include="components/header.html"></div>
     <main>
-        <div data-include="sections/hero.html"></div>
-        <div data-include="sections/features.html"></div>
-        <div data-include="sections/tools.html"></div>
-        <div data-include="sections/courses.html"></div>
-        <div data-include="sections/progress.html"></div>
+      <div data-include="sections/hero/hero.html"></div>
+      <div data-include="sections/courses/courses.html"></div>
+      <div data-include="sections/tools/tools.html"></div>
+      <div data-include="sections/progress/progress.html"></div>
+      <div data-include="sections/features/features.html"></div>
     </main>
     <div data-include="components/footer.html"></div>
 
-    <!-- Load main.js only after includes are injected -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const includeElements = document.querySelectorAll('[data-include]');
-            let includesLoaded = 0;
+      //   <!-- Open sidebar  -->
+      function initHamburgerMenu() {
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.getElementById("navLinks");
+        const overlay = document.getElementById("navOverlay");
 
-            includeElements.forEach(async (el) => {
-                const file = el.getAttribute('data-include');
-                try {
-                    const res = await fetch(file);
-                    const html = await res.text();
-                    el.innerHTML = html;
-                } catch (e) {
-                    el.innerHTML = `<p>Could not load: ${file}</p>`;
-                } finally {
-                    includesLoaded++;
-                    if (includesLoaded === includeElements.length) {
-                        initApp(); // Load main logic
-                    }
-                }
-            });
+        if (!hamburger || !navLinks) return;
+
+        hamburger.addEventListener("click", () => {
+          navLinks.classList.toggle("active");
+          hamburger.classList.toggle("open");
+          overlay.classList.toggle("active");
         });
 
-        function initApp() {
-            const script = document.createElement('script');
-            script.src = "js/main.js";
-            script.defer = true;
-            document.body.appendChild(script);
-        }
-    </script>
-</body>
+        // Close on overlay click
+        overlay.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+          hamburger.classList.remove("open");
+          overlay.classList.remove("active");
+        });
 
+        // Close on link click
+        document.querySelectorAll(".nav-links a").forEach((link) => {
+          link.addEventListener("click", () => {
+            navLinks.classList.remove("active");
+            hamburger.classList.remove("open");
+            overlay.classList.remove("active");
+          });
+        });
+      }
+    </script>
+
+    <!-- Load scripts after includes are injected -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const includeElements = document.querySelectorAll("[data-include]");
+        let includesLoaded = 0;
+
+        includeElements.forEach(async (el) => {
+          const file = el.getAttribute("data-include");
+          try {
+            const res = await fetch(file);
+            const html = await res.text();
+            el.innerHTML = html;
+          } catch (e) {
+            el.innerHTML = `<p>Could not load: ${file}</p>`;
+          } finally {
+            includesLoaded++;
+            if (includesLoaded === includeElements.length) {
+              loadScripts();
+
+              setTimeout(() => {
+                initHamburgerMenu();
+              }, 100);
+            }
+          }
+        });
+      });
+
+      function loadScripts() {
+        const scripts = [
+          "js/data.js",
+          "sections/hero/hero.js",
+          "sections/courses/courses.js",
+          "sections/features/features.js",
+          "sections/tools/tools.js",
+          "sections/progress/progress.js",
+          "js/main.js",
+        ];
+
+        scripts.forEach((src) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.defer = true;
+          document.body.appendChild(script);
+        });
+
+        // 👇 ADD THIS
+        setTimeout(() => {
+          if (typeof renderCourses === "function") {
+            renderCourses("all");
+          }
+        }, 100);
+      }
+    </script>
+  </body>
 </html>
